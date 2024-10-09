@@ -15,54 +15,38 @@ import com.example.todo_app.entity.Todo
 import com.example.todo_app.screen.TodoItem
 import com.example.todo_app.viewmodel.TodoViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun SearchPage(modifier: Modifier =Modifier) {
-    val todoviewmodel = TodoViewModel()
+    @OptIn(ExperimentalMaterial3Api::class)
+    @Composable
+    fun SearchPage(modifier: Modifier =Modifier) {
+        val todoviewmodel = TodoViewModel()
 
-    var searchText by remember { mutableStateOf("") }
+        var searchText by remember { mutableStateOf("") }
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.Top,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-
-        OutlinedTextField(
-            value = searchText,
-            onValueChange = { searchText = it },
-            label = { Text("Search") },
+        Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 16.dp)
-        )
-
-        Button(
-            onClick = {  TodoViewModel().addData(searchText)},
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(48.dp)
+                .fillMaxSize()
+                .padding(16.dp),
+            verticalArrangement = Arrangement.Top,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text("Add")
+
+            OutlinedTextField(
+                value = searchText,
+                onValueChange = { searchText = it },
+                label = { Text("Search") },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 16.dp)
+            )
+
+            Button(
+                onClick = {  TodoViewModel().addData(searchText)},
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(48.dp)
+            ) {
+                Text("Add")
+            }
         }
     }
-}
 
-@Preview(showBackground = true)
-@Composable
-fun SearchPagePreview() {
-    SearchPage()
-}
-
-@Composable
-fun DisplayTodo() {
-    val todoviewmodel = TodoViewModel()
-    val todos = todoviewmodel._todoList.observeAsState(emptyList())
-    LazyColumn {
-       items(todos.value){
-           item -> TodoItem(todo = item)
-       }
-    }
-}

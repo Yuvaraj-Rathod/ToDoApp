@@ -1,5 +1,6 @@
 package com.example.todo_app.screen
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -19,8 +20,8 @@ import com.example.todo_app.viewmodel.TodoViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TodoItem(todo: Todo) {
-    val todoviewmodel = TodoViewModel()
+fun TodoItem(todo: Todo,todoviewmodel: TodoViewModel) {
+
     Box(
         modifier = Modifier
             .fillMaxWidth()
